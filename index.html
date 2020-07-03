@@ -1,1 +1,106 @@
-Hello, world.
+<!DOCTYPE>
+<html>
+    <head>
+        <title>MergeResolver - Documentation</title>
+        <style>
+         :root {
+             --gr-red: #d81e05
+         }
+         body {
+             max-width: 50em;
+             margin: 2em auto;
+             font-family: serif
+         }
+         h1, h2, h3, h4, h5, h6 {
+             font-family: system-ui, sans-serif;
+             font-weight: bolder;
+         }
+         img {
+             display: block;
+             width: 100%;
+         }
+         hr {
+             border-top: 1px;
+         }
+         a {
+             color: var(--gr-red)
+         }
+        </style>
+    </head>
+    <body>
+        <hgroup>
+            <h1>MergeResolver</h1>
+            <div>Automatic Merge Conflict Resolution <i>from <a href="https://www.grammatech.com/">GrammaTech</a></i></div>
+        </hgroup>
+
+        <ul class="toc">
+            <li><a href="#intro">How it works</a></li>
+            <li><a href="#install">Installation</a></li>
+            <li><a href="#support">Support</a></li>
+        </ul>
+
+        <section>
+            <h2>What is MergeResolver?</h2>
+            <p>MergeResolver is a new GitHub app that automates resolving merge conflicts — but leaves developers in control.</p>
+
+            <p>Currently MergeResolver only supports JavaScript projects.</p>
+        </section>
+
+        <section>
+            <h2 id="intro">How MergeResolver Works</h2>
+
+            <p>When you install MergeResolver on a repository, it waits for a conflict to happen. Conflicts can happen with new pull requests, or when a new commit to master conflicts with one or more open pull requests.</p>
+
+            <h3>Step 1: AST merging</h3>
+
+            <p>If a conflict happens, MergeResolver clones your repository and gets to work. First, it tries to avoid the conflict by retrying the merge, but on the Abstract Syntax Tree (AST) level.</p>
+
+            <img alt="Screenshot of an AST merge"
+                 src="img/Screen_Shot_2020-06-11_at_10.webp">
+
+            <p>By treating code as ASTs rather than simply a string of characters, MergeResolver recognizes code's structure and semantics. This ensures all potential conflict resolutions will parse as valid code, and in some cases cleanly reconciles changes that would conflict under Git's built-in, line-oriented merge algorithms (as in the above example).</p>
+
+            <img alt="Screenshot of a MergeResolver check in progress."
+                 src="img/screenshot-1.webp">
+
+            <h3>Step 2: Auto-merging</h3>
+
+            <p>If AST merging fails, things get more interesting. MergeResolver understands different strategies for reconciling merge conflicts – strategies mined from large datasets of real-world merge conflict resolutions (see <a href="https://pdfs.semanticscholar.org/5020/2e00774dd41f746cf4bab6b41c920dc6ee64.pdf">On the nature of merge conflicts</a>). With this knowledge it can generate possible conflict resolutions.</p>
+
+            <p>But how does it know which generated conflict resolutions are viable? MergeResolver relies on the only source of truth about a program's requirements: its test suite. MergeResolver finds a viable resolution by looking for a resolution that passes your program's test suite.</p>
+
+            <h3>Step 3: Presenting the results</h3>
+
+            <p>Once MergeResolver finds a resolution that passes your test suite, it uses GitHub's <a href="https://developer.github.com/v3/checks/">Checks API</a> to provide a button (under the Checks tab on the pull request) that can be used to accept the resolution.</p>
+
+            <img alt="Screenshot of a successful merge with a prompt to accept it."
+                 src="img/screenshot-3.webp">
+
+            <p>If you want to inspect the conflict resolution before accepting it, a link is provided to a diff of the merge resolution commit.</p>
+
+        </section>
+
+        <section>
+            <h2 id="install">Installing MergeResolver</h2>
+
+            <p>MergeResolver is currently available for <a href="https://github.com/apps/mergeresolver">direct installation</a>. It is free for open-source projects to try. You can add MergeResolver to your Node-based JavaScript repository <a href="https://github.com/apps/mergeresolver/installations/new">here</a>.</p>
+
+            <p>Note that MergeResolver currently targets JavaScript, which means that your repository needs to have a <code>package.json</code> file. This is necessary so MergeResolver can run your test suite.</p>
+
+        </section>
+
+        <section>
+            <h2 id="support">Support</h2>
+
+            <p>Support is available through a <a href="https://github.com/automergeorg/support">dedicated support repository</a>. If you have a problem with MergeResolver, or an idea for improvement, please open an issue there.</p>
+
+            <p>Let us know</a> what works well or not for you, and we'll strive to make MergeResolver useful enough that it becomes a staple of your team's development workflow.</p>
+
+        </section>
+
+        <hr>
+
+        <p><small>This material is based upon work supported by the Defense Advanced Research Projects Agency (DARPA) under Contract No. D17PC00096. Any opinions, findings and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the Defense Advanced Research Projects Agency (DARPA); or its Contracting Agent, the U.S. Department of the Interior, Interior Business Center, Acquisition Services Directorate, Division III.</small></p>
+
+    </body>
+</html>
