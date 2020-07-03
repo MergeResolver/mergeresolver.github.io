@@ -1,1 +1,1 @@
-For documentation on MergeResolver, see [mergeresolver.github.io](mergeresolver.github.io).
+For documentation on MergeResolver, see [mergeresolver.github.io](https://mergeresolver.github.io).
