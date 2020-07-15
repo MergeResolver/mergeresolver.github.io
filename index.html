@@ -36,6 +36,7 @@
 
         <ul class="toc">
             <li><a href="#intro">How it works</a></li>
+            <li><a href="#faq">FAQ</a></li>
             <li><a href="#install">Installation</a></li>
             <li><a href="#support">Support</a></li>
         </ul>
@@ -78,6 +79,43 @@
                  src="img/screenshot-3.png">
 
             <p>If you want to inspect the conflict resolution before accepting it, a link is provided to a diff of the merge resolution commit.</p>
+
+        </section>
+
+        <section>
+            <h2 id="faq">FAQ</h2>
+
+            <h4>Isn't it dangerous to let a robot commit code?</h4>
+
+            <p>MergeResolver just suggests a change. You have the opportunity to review it before accepting, and it's up to you to choose whether or not to apply it. Think of it as a fast junior engineer whose work needs to be double checked. </p>
+
+            <h4>Are changes like semicolons or whitespace diffed with the AST?</h4>
+
+            <p>Yes. For example, diffing</p>
+
+            <code><pre>var x = 1; var y = 2</pre></code>
+
+            <p>vs.</p>
+
+            <code>
+                <pre>var x = 1
+var y = 2</pre>
+            </code>
+
+            <p>results in an AST diff:</p>
+
+            <code>
+                <pre>
+var x = 1[-;-]{+
++}[- -]var y = 2</pre>
+            </code>
+
+            <h4>How did you test this? How do you know it works?</h4>
+            <p>We cloned a large number of the top JavaScript repositories from GitHub, programmatically identified every merge commit, selected those that conflicted when reproduced, and then applied our tool to those.</p>
+
+            <h4>Who is behind this?</h4>
+            <p>MergeResolver is a product of <a href="https://www.grammatech.com/sponsored-research">GrammaTech's Research Division</a>, funded largely by DARPA.</p>
+            </p>
 
         </section>
 
